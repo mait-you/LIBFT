@@ -1,47 +1,51 @@
+#include "libft.h"
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-// static int n_len(long int n)
-// {
-// 	int	l;
-	
-// 	l = 1;
-// 	if (n < 0)
-// 		n = -n;
-// 	while (n > 1)
-// 	{
-// 		n /= 10;
-// 		l++;
-// 	}
-// 	return (l);
-// }
-
-static int	count_words(char const *s, char c)
+typedef struct node
 {
-	int	count;
-	int	key;
+	int val;
+	struct node *next;
+} node_t;
 
-	count = 0;
-	key = 1;
-	while (*s)
+void print_list(node_t *head)
+{
+	node_t *current = head;
+	while (current)
 	{
-		if (*s != c && key)
-		{
-			count++;
-			key = !key;
-		}
-		if (*s == c && !key)
-			key = !key;
-		s++;
+		printf("%d\n", current->val);
+		current = current->next;
 	}
-	return (count);
 }
+
+void puch_list_end(node_t *head, int val)
+{
+	node_t *current = head;
+	while (current->next)
+		current = current->next;
+	current->next = (node_t *)malloc(sizeof(node_t));
+	current->next->val = val;
+	current->next->next = NULL;
+}
+
+// void pell_list_start(node_t **head, int val)
+// {
+// 	node_t *current = head;
+// 	current->next = (node_t *)malloc(sizeof(node_t))
+
+// }
 
 int main()
 {
-	// int x = -12345;
-	// printf("%d\n", n_len(x));
+	node_t *head = NULL;
+	if (!(head = (node_t *) malloc(sizeof(node_t))))
+		return -1;
+	head->val = 1;
+	head->next = NULL;
 
-	char *s = "Hello,_World!";
-	printf("%d\n", count_words(s, '_'));
-
+	print_list(head);
+	puch_list(head, 2);
+	print_list(head);
 }
