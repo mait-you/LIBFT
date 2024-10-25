@@ -1,2 +1,2 @@
 # LIBFT
-my lib
+LIBFT
